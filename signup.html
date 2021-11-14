@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
 
-    <link rel="stylesheet" href="style-signup.css">
+    <link rel="stylesheet" href="password_style.css">
 </head>
 
 <body>
@@ -52,7 +52,9 @@
 
 <!-- Signup FORM -->
 
+
     <div class="signup-form">
+        <form name="myform" method="post" action="index.html" onsubmit="return phoneemail()">
             <h2>Sign Up</h2>
             <p>Please fill in this form to create an account!</p>
             <hr>
@@ -101,8 +103,89 @@
                 <div class="text-center">Already have an account? <a href="login.html">Login here</a></div>
             </div>
             
-       
+        </form>
         
     </div>
+
+
+<script>
+function passwordChanged() {
+
+           
+let pwd=document.myform.password.value; 
+let strength=document.getElementById("strength");
+
+            
+if(pwd.length<=6)no=1;
+
+// If the password length is greater than 6 and contain any lowercase alphabet or any number or any special character
+if(pwd.length>6 && (pwd.match(/[a-z]/) || pwd.match(/\d+/) || pwd.match(/.[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/)))no=2;
+
+// If the password length is greater than 6 and contain alphabet,number,special character respectively
+if(pwd.length>6 && ((pwd.match(/[a-z]/) && pwd.match(/\d+/)) || (pwd.match(/\d+/) && pwd.match(/.[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/)) || (pwd.match(/[a-z]/) && pwd.match(/.[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/))))no=3;
+
+// If the password length is greater than 6 and must contain alphabets,numbers and special characters
+if(pwd.length>6 && pwd.match(/[a-z]/) && pwd.match(/\d+/) && pwd.match(/.[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/))no=4;
+    
+if(no==1){
+    strength.innerHTML = "Very Weak";
+    strength.style.background="red";
+    strength.style.color="white"
+}
+
+else
+if(no==2){
+    strength.innerHTML = "Weak";
+    strength.style.background="#a84232";
+    strength.style.color="white"
+}
+
+else
+if(no==3){
+    strength.innerHTML = "Medium";
+    strength.style.background="orange";
+    strength.style.color="white"
+}
+
+if(no==4){
+    strength.innerHTML = "Strong";
+    strength.style.background="Green";
+    strength.style.color="white";
+  
+}
+}
+
+function phoneemail(){  
+ 
+	let name=document.myform.email.value;  
+    let pass=document.myform.password.value;  
+    let num=document.myform.phonenumbe.value;
+
+      let reg=/^([A-Za-z0-9\.-]+)@([A-Za-z0-9\-]+).([a-z]{2,3})(.[a-z]{2,3})?$/
+	  
+	if (name==null || name==""){  
+	  alert("Name can't be blank");  
+	  return false;  
+	}
+	else if(pass.length<6){  
+	  alert("Password must be at least 6 characters long.");  
+	  return false;  
+      }  
+	else if(!(reg.test(name))){
+		alert("Invalid Email Format");
+		return false;
+    }
+    else if(!(num.length==10)){
+		alert("Digits of Phone Number Not Equal to 10");
+		return false;
+	}
+
+
+      else if(n==4)
+      return true;
+	
+	}
+</script>
+  
 </body>
 </html>
